@@ -1,6 +1,8 @@
 package com.example.mylectureroom;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,7 +62,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        // 동환 추가한 코드
+        Button nameButton = (Button) findViewById(R.id.button_main_insert); // 버튼
 
+        nameButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(), NextActivity1.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
