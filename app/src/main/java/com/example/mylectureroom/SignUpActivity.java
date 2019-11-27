@@ -35,9 +35,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mPassword;
     private EditText mPassword2;
     private TextView mTextViewResult;
-    private static final String TAG_JSON = "MYJSON";
-    private static final String TAG_ID = "ID";
-    String mJsonString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +103,24 @@ public class SignUpActivity extends AppCompatActivity {
 
             if(result == null) {
                 mTextViewResult.setText(errorString);
+            }
+            else if(gID.equals("") || gPassword.equals("")){
+                mTextViewResult.setText("ID나 Password는 공란으로 할 수 없습니다.");
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                builder.setMessage("ID나 Password는 공란으로 할 수 없습니다.");
+                builder.setTitle("Error")
+                        .setCancelable(false)
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int i){
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.setTitle("Error");
+                alert.show();
+
+
             }
             else if (!result.equals("fail")){
                 mTextViewResult.setText("Duplicated ID. Please Enter Another ID.");

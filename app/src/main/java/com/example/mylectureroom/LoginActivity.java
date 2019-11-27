@@ -28,10 +28,6 @@ public class LoginActivity extends AppCompatActivity {
     private static String IP_ADDRESS = "155.230.52.54:9900";
     private static String TAG = "phptest";
 
-    private static final String TAG_JSON="MYJSON";
-    private static final String TAG_ID = "ID";
-    private static final String TAG_PASSWORD = "PASSWORD";
-
     private EditText mID;
     private EditText mPassword;
     private TextView mTextViewResult;
@@ -58,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
                 GetData task = new GetData();
                 task.execute("http://" + IP_ADDRESS + "/login.php", id, password);
 
-
                 mID.setText("");
                 mPassword.setText("");
             }
@@ -78,6 +73,8 @@ public class LoginActivity extends AppCompatActivity {
 
         ProgressDialog progressDialog;
         String errorString = null;
+        String gID;
+        String gPassword;
 
         @Override
         protected void onPreExecute() {
@@ -95,11 +92,10 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.dismiss();
             Log.d(TAG, "response - " + result);
 
-            System.out.println(result + "111111");
             if (result == null){
                 mTextViewResult.setText(errorString);
             }
-            else if (result.equals("fail")){
+            else if ((result.equals("fail")) || (gID.equals("")) || (gPassword.equals(""))){
                 mTextViewResult.setText("ID or Password is wrong.");
                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                 builder.setMessage("ID or PW is wrong. please check again.");
@@ -127,8 +123,8 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            String gID = (String)params[1];
-            String gPassword = (String)params[2];
+            gID = (String)params[1];
+            gPassword = (String)params[2];
             String SHAPassword = SHAEncode(gPassword);
             String serverURL = (String)params[0];
             String postParameters = "ID=" + gID + "&PW=" + SHAPassword;
