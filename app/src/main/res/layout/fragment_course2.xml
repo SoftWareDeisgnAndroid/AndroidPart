@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NextActivity1">
+    tools:context=".courseFragment">
 
     <RadioGroup
         android:layout_width="200dp"

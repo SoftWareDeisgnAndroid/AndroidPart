@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         nameButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), NextActivity1.class);
+                Intent intent = new Intent(getApplicationContext(), nextActivity.class);
                 startActivity(intent);
             }
         });
@@ -165,5 +166,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private long lastTimeBackPressed;
 
+    @Override
+    public void onBackPressed(){
+        if(System.currentTimeMillis()-lastTimeBackPressed < 1500){
+            finish();
+            return ;
+        }
+        Toast.makeText(this, "뒤로 버튼을 한 번 더 눌러 종료합니다", Toast.LENGTH_SHORT);
+         lastTimeBackPressed = System.currentTimeMillis();
+    }
 }
