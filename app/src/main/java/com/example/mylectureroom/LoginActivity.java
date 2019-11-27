@@ -97,7 +97,6 @@ public class LoginActivity extends AppCompatActivity {
 
             System.out.println(result + "111111");
             if (result == null){
-
                 mTextViewResult.setText(errorString);
             }
             else if (result.equals("fail")){
