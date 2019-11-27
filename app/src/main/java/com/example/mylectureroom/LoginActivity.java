@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         button_goto.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -117,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             else {
+                mTextViewResult.setText("Login Success.");
                 Intent intent = new Intent(getApplicationContext(), TempActivity.class);
                 startActivity(intent);
             }
@@ -130,8 +131,6 @@ public class LoginActivity extends AppCompatActivity {
             String gPassword = (String)params[2];
             String SHAPassword = SHAEncode(gPassword);
             String serverURL = (String)params[0];
-            System.out.println(gID + "1111111");
-            System.out.println(SHAPassword + "2222222");
             String postParameters = "ID=" + gID + "&PW=" + SHAPassword;
 
 

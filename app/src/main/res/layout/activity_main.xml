@@ -49,15 +49,16 @@
         android:text="Insert"
         android:id="@+id/button_main_insert" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:id="@+id/textView_main_result" />
-
     <Button
         android:id="@+id/button_goto_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Goto Login Page" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/textView_main_result" />
+
 
 </LinearLayout>

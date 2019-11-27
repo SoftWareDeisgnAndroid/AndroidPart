@@ -26,7 +26,7 @@ import java.net.URL;
 import java.security.MessageDigest;
 
 
-public class MainActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private static String IP_ADDRESS = "155.230.52.54:9900";
     private static String TAG = "phptest";
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(MainActivity.this,
+            progressDialog = ProgressDialog.show(SignUpActivity.this,
                     "Please Wait", null, true, true);
         }
 
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else if (!result.equals("fail")){
                 mTextViewResult.setText("Duplicated ID. Please Enter Another ID.");
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                 builder.setMessage("Duplicated ID");
                 builder.setTitle("Error")
                         .setCancelable(false)
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else if (!gPassword.equals(gPassword2)){
                 mTextViewResult.setText("Passwords are not same. Please enter correctly.");
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                 builder.setMessage("Passwords are not same");
                 builder.setTitle("Error")
                         .setCancelable(false)
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(MainActivity.this,
+            progressDialog = ProgressDialog.show(SignUpActivity.this,
                     "Please Wait", null, true, true);
         }
 
