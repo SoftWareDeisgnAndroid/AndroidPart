@@ -1,43 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ID"
-        android:id="@+id/textView_ID" />
+        android:id="@+id/textView_loginID" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText_ID" />
+        android:id="@+id/editText_loginID" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PASSWORD"
-        android:id="@+id/textView_Password" />
+        android:id="@+id/textView_loginPassword" />
 
     <EditText
-        android:id="@+id/editText_Password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword" />
-
-    <TextView
-        android:id="@+id/textView_Password2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="PASSWORD Verification" />
-
-    <EditText
-        android:id="@+id/editText_Password2"
+        android:id="@+id/editText_loginPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -47,17 +31,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Insert"
-        android:id="@+id/button_main_insert" />
+        android:id="@+id/button_login_insert" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:id="@+id/textView_main_result" />
+        android:id="@+id/textView_login_result" />
 
     <Button
-        android:id="@+id/button_goto_login"
+        android:id="@+id/button_goto_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Goto Login Page" />
+        android:text="Goto Sign-In Page" />
 
 </LinearLayout>
