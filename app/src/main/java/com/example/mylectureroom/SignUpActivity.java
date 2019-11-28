@@ -41,15 +41,15 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        mID = (EditText)findViewById(R.id.editText_ID);
-        mPassword = (EditText)findViewById(R.id.editText_Password);
-        mPassword2 = (EditText)findViewById(R.id.editText_Password2);
-        mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
+        mID = (EditText)findViewById(R.id.editText_signupID);
+        mPassword = (EditText)findViewById(R.id.editText_signupPassword);
+        mPassword2 = (EditText)findViewById(R.id.editText_signupPassword2);
+        mTextViewResult = (TextView)findViewById(R.id.textView_signup_result);
         mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
 
 
 
-        Button buttonInsert = (Button)findViewById(R.id.button_main_insert);
+        Button buttonInsert = (Button)findViewById(R.id.button_signup_insert);
         Button button_goto = (Button)findViewById(R.id.button_goto_login);
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -10,7 +10,9 @@
         android:label="빈 강의실 찾기"
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
         <activity android:name=".SignUpActivity">
 
         </activity>

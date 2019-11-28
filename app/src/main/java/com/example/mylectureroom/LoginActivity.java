@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
 
         Button buttonInsert = (Button)findViewById(R.id.button_login_insert);
-        Button button_goto = (Button)findViewById(R.id.button_goto_main);
+        Button button_goto = (Button)findViewById(R.id.button_goto_signup);
 
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -114,8 +115,9 @@ public class LoginActivity extends AppCompatActivity {
 
             else {
                 mTextViewResult.setText("Login Success.");
-                Intent intent = new Intent(getApplicationContext(), TempActivity.class);
+                Intent intent = new Intent(getApplicationContext(), nextActivity.class);
                 startActivity(intent);
+                finish();
             }
         }
 
