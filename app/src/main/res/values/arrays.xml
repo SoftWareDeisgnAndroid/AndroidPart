@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="major">
+    <string-array name="universityMajor">
         <item>가정교육과</item>
         <item>교육교육과</item>
         <item>기술교육과</item>
@@ -11,31 +11,94 @@
         <item>생물교육과</item>
         <item>수학교육과</item>
         <item>역사교육과</item>
-        <item>역사교육과(대학원)</item>
-        <item>불어교육과(대학원)</item>
-        <item>생물교육과(대학원)</item>
-        <item>수학교육과(대학원)</item>
-        <item>역사교육과(대학원)</item>
     </string-array>
-    <string-array name="year">
-        <item>2016년도</item>
-        <item>2017년도</item>
-        <item>2018년도</item>
-        <item>2019년도</item>
+    <string-array name="universityRefinementMajor">
+        <item>교양이론</item>
+        <item>교양실습</item>
+        <item>교양기술</item>
+        <item>교양체육</item>
+        <item>교양물리</item>
+        <item>교양수학</item>
+        <item>교양가정</item>
+        <item>교양수영</item>
+        <item>교양생물</item>
+        <item>교양지식</item>
     </string-array>
-    <string-array name="term">
-        <item>1학기</item>
-        <item>여름학기</item>
-        <item>2학기</item>
-        <item>겨울학기</item>
+
+    <string-array name="floor">
+        <item>지하2층</item>
+        <item>지하1층</item>
+        <item>1층</item>
+        <item>2층</item>
+        <item>3층</item>
+        <item>4층</item>
+        <item>5층</item>
     </string-array>
-    <string-array name="graduateArea">
-        <item>교육학공동</item>
-        <item>선수</item>
-        <item>전공</item>
+    <string-array name="building">
+        <item>IT융복합관</item>
+        <item>글로벌플라자</item>
+        <item>복현회관</item>
+        <item>인문대학</item>
+        <item>대학원동</item>
+        <item>제4합강의동</item>
+        <item>인문한국진흥관</item>
+        <item>종합전보센터</item>
+        <item>약학대학</item>
+        <item>조형관</item>
+        <item>사회과학대학</item>
+        <item>교육대학원</item>
+        <item>생명공학관</item>
+        <item>제1과학관</item>
+        <item>제2과학관</item>
+        <item>화학관</item>
+        <item>생물학관</item>
+        <item>자연과학대학</item>
+        <item>농대1호관</item>
+        <item>농대2호관</item>
+        <item>농대3호관</item>
+        <item>경상대학</item>
+        <item>국제경상관</item>
+        <item>법과대학</item>
+        <item>공대1호관</item>
+        <item>공대2호관</item>
+        <item>공대3호관</item>
+        <item>공대6호관</item>
+        <item>공대7호관</item>
+        <item>공대8호관</item>
+        <item>공대9호관</item>
+        <item>공대12호관</item>
+        <item>외국어교육관</item>
+        <item>IT대학1호관</item>
+        <item>IT대학2호관</item>
+        <item>IT대학3호관</item>
+        <item>IT대학4호관</item>
     </string-array>
-    <string-array name="universityArea">
-        <item>교양및기타</item>
-        <item>전공</item>
+    <string-array name="time">
+        <item>09시</item>
+        <item>09시30분</item>
+        <item>10시</item>
+        <item>10시30분</item>
+        <item>11시</item>
+        <item>11시30분</item>
+        <item>12시</item>
+        <item>12시30분</item>
+        <item>12시</item>
+        <item>12시30분</item>
+        <item>13시</item>
+        <item>13시30분</item>
+        <item>14시</item>
+        <item>14시30분</item>
+        <item>15시</item>
+        <item>15시30분</item>
+        <item>16시</item>
+        <item>16시30분</item>
+        <item>17시</item>
+        <item>17시30분</item>
+        <item>18시</item>
+        <item>18시30분</item>
+        <item>19시</item>
+        <item>19시30분</item>
+        <item>20시</item>
+        <item>20시30분</item>
     </string-array>
 </resources>

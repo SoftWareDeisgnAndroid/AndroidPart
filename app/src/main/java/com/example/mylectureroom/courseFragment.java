@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -68,12 +69,15 @@ public class courseFragment extends Fragment {
     }
 
 
-    private ArrayAdapter yearAdapter;
-    private Spinner yearSpinner;
-    private ArrayAdapter termAdapter;
-    private Spinner termSpinner;
-    private ArrayAdapter areaAdapter;
-    private Spinner areaSpinner;
+    private ArrayAdapter buildingAdapter;
+    private Spinner buildingSpinner;
+    private ArrayAdapter floorAdapter;
+    private Spinner floorSpinner;
+    private ArrayAdapter timeAdapter;
+    private Spinner timeSpinner;
+    // major 관련 추후 삭제
+    private ArrayAdapter majorAdapter;
+    private Spinner majorSpinner;
 
     private String courseUniversity = "";
     private String courseYear = "";
@@ -84,11 +88,11 @@ public class courseFragment extends Fragment {
     public void onActivityCreated(Bundle b) {
         super.onActivityCreated(b);
 
-        System.out.println("11111111");
         final RadioGroup courseUniversityGroup = (RadioGroup) getView().findViewById(R.id.courseUniversityGroup);
-        yearSpinner = (Spinner) getView().findViewById(R.id.yearSpinner);
-        termSpinner = (Spinner) getView().findViewById(R.id.termSpinner);
-        areaSpinner = (Spinner) getView().findViewById(R.id.areaSpinner);
+        buildingSpinner = (Spinner) getView().findViewById(R.id.buildingSpinner); // 건물
+        floorSpinner = (Spinner) getView().findViewById(R.id.floorSpinner); // 층
+        timeSpinner = (Spinner) getView().findViewById(R.id.timeSpinner); // 시간
+        majorSpinner = (Spinner) getView().findViewById(R.id.majorSpinner);
 
         courseUniversityGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -96,19 +100,37 @@ public class courseFragment extends Fragment {
                 RadioButton courseButton = (RadioButton) getView().findViewById(i);
                 courseUniversity = courseButton.getText().toString();
 
-                yearAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.year, android.R.layout.simple_spinner_dropdown_item);
-                yearSpinner.setAdapter(yearAdapter);
+                buildingAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.building, android.R.layout.simple_spinner_dropdown_item);
+                buildingSpinner.setAdapter(buildingAdapter);
 
-                termAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.term, android.R.layout.simple_spinner_dropdown_item);
-                termSpinner.setAdapter(termAdapter);
+                floorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.floor, android.R.layout.simple_spinner_dropdown_item);
+                floorSpinner.setAdapter(floorAdapter);
 
                 if (courseUniversity.equals("학부")) {
-                    areaAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universityArea, android.R.layout.simple_spinner_dropdown_item);
-                    areaSpinner.setAdapter(areaAdapter);
-                } else if (courseUniversity.equals("대학원")) {
-                    areaAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.graduateArea, android.R.layout.simple_spinner_dropdown_item);
-                    areaSpinner.setAdapter(areaAdapter);
+                    timeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.time, android.R.layout.simple_spinner_dropdown_item);
+                    timeSpinner.setAdapter(timeAdapter);
+                    majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universityRefinementMajor, android.R.layout.simple_spinner_dropdown_item);
+                    majorSpinner.setAdapter(majorAdapter);
                 }
+            }
+        });
+
+        timeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(timeSpinner.getSelectedItem().equals("교양및기타")){
+                    majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universityRefinementMajor, android.R.layout.simple_spinner_dropdown_item);
+                    majorSpinner.setAdapter(majorAdapter);
+                }
+                else if(timeSpinner.getSelectedItem().equals("전공")){
+                    majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universityMajor, android.R.layout.simple_spinner_dropdown_item);
+                    majorSpinner.setAdapter(majorAdapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
