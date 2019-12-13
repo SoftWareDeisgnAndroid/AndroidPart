@@ -44,7 +44,7 @@
             android:layout_height = "wrap_content"
             android:layout_gravity = "center"
             android:layout_marginLeft = "5dp"
-            android:id = "@+id/floorSpinner"></Spinner>
+            android:id = "@+id/daySpinner"></Spinner>
 
         <Spinner
             android:layout_width = "150dp"

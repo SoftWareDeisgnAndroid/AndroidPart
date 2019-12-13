@@ -20,6 +20,7 @@ public class nextActivity extends AppCompatActivity {
 
         firstFragment = new courseFragment();
         setDefaultFragment();
+
     }
 
     public void setDefaultFragment(){

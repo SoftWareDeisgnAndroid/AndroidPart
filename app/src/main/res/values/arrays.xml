@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="universityMajor">
-        <item>가정교육과</item>
-        <item>교육교육과</item>
-        <item>기술교육과</item>
-        <item>독어교육과</item>
-        <item>물리교육과</item>
-        <item>미술교육과</item>
-        <item>불어교육과</item>
-        <item>생물교육과</item>
-        <item>수학교육과</item>
-        <item>역사교육과</item>
-    </string-array>
+
     <string-array name="universityRefinementMajor">
         <item>교양이론</item>
         <item>교양실습</item>
@@ -25,14 +14,14 @@
         <item>교양지식</item>
     </string-array>
 
-    <string-array name="floor">
-        <item>지하2층</item>
-        <item>지하1층</item>
-        <item>1층</item>
-        <item>2층</item>
-        <item>3층</item>
-        <item>4층</item>
-        <item>5층</item>
+    <string-array name="day">
+        <item>월요일</item>
+        <item>화요일</item>
+        <item>수요일</item>
+        <item>목요일</item>
+        <item>금요일</item>
+        <item>토요일</item>
+        <item>일요일</item>
     </string-array>
     <string-array name="building">
         <item>IT융복합관</item>
