@@ -18,6 +18,7 @@ public class nextActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next);
 
+
         firstFragment = new courseFragment();
         setDefaultFragment();
 

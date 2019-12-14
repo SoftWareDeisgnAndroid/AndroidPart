@@ -3,6 +3,7 @@ package com.example.mylectureroom;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
@@ -51,15 +53,15 @@ public class courseFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String IP_ADDRESS = "155.230.52.54:9900";
-    private static final String TAG="phptest";
-    private static final String TAG_CLASSCODE = "CLASSCODE";
-    private static final String TAG_GRADE = "GRADE";
-    private static final String TAG_CLASSNAME ="CLASSNAME";
-    private static final String TAG_CLASSBUILDING ="CLASSBUILDING";
-    private static final String TAG_CLASSROOM ="CLASSROOM";
-    private static final String TAG_CLASSTIME ="CLASSTIME";
+    private static final String TAG = "phptest";
+    private static final String TAG_JSON = "MYJSON";
+    private static final String TAG_CLASSNAME = "CLASSNAME";
+    private static final String TAG_CLASSBUILDING = "CLASSBUILDING";
+    private static final String TAG_CLASSROOM = "CLASSROOM";
+    private static final String TAG_CLASSTIME = "Time";
     ArrayList<HashMap<String, String>> mArrayList;
 
+    ListView mListViewList;
     String mJsonString;
 
     // TODO: Rename and change types of parameters
@@ -112,8 +114,8 @@ public class courseFragment extends Fragment {
 
     private String courseUniversity = "";
     private String courseBuilding = "";
-    private String courseDay= "";
-    private String pushDay="";
+    private String courseDay = "";
+    private String pushDay = "";
     private String courseTime = "";
 
     @Override
@@ -121,73 +123,67 @@ public class courseFragment extends Fragment {
     public void onActivityCreated(Bundle b) {
         super.onActivityCreated(b);
 
-        final RadioGroup courseUniversityGroup = (RadioGroup) getView().findViewById(R.id.courseUniversityGroup);
         buildingSpinner = (Spinner) getView().findViewById(R.id.buildingSpinner); // 건물
         daySpinner = (Spinner) getView().findViewById(R.id.daySpinner); // 층
         timeSpinner = (Spinner) getView().findViewById(R.id.timeSpinner); // 시간
-        majorSpinner = (Spinner) getView().findViewById(R.id.majorSpinner);
-
-        // RadioGroup Button("학부")을 눌렀을 때 바로 적용됨
-        courseUniversityGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                RadioButton courseButton = (RadioButton) getView().findViewById(i);
-                courseUniversity = courseButton.getText().toString();
-
-                buildingAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.building, android.R.layout.simple_spinner_dropdown_item);
-                buildingSpinner.setAdapter(buildingAdapter);
-
-                dayAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.day, android.R.layout.simple_spinner_dropdown_item);
-                daySpinner.setAdapter(dayAdapter);
+        mListViewList = (ListView) getView().findViewById(R.id.courseListView);
 
 
-                timeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.time, android.R.layout.simple_spinner_dropdown_item);
-                timeSpinner.setAdapter(timeAdapter);
-                majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universityRefinementMajor, android.R.layout.simple_spinner_dropdown_item);
-                majorSpinner.setAdapter(majorAdapter);
-            }
-        });
+        buildingAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.building, android.R.layout.simple_spinner_dropdown_item);
+        buildingSpinner.setAdapter(buildingAdapter);
 
-        Button searchButton = (Button)getView().findViewById(R.id.searchButton);
-        searchButton.setOnClickListener(new View.OnClickListener(){
+        dayAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.day, android.R.layout.simple_spinner_dropdown_item);
+        daySpinner.setAdapter(dayAdapter);
+
+
+        timeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.time, android.R.layout.simple_spinner_dropdown_item);
+        timeSpinner.setAdapter(timeAdapter);
+
+
+        Button searchButton = (Button) getView().findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 courseBuilding = buildingSpinner.getSelectedItem().toString();
                 courseDay = daySpinner.getSelectedItem().toString();
                 courseTime = timeSpinner.getSelectedItem().toString();
 
+                pushDay = "";
                 String temp = "";
-                if(courseTime.equals("09시")) temp = "1A";
-                else if(courseTime.equals("09시30분")) temp="1B";
-                else if(courseTime.equals("10시")) temp="2A";
-                else if(courseTime.equals("10시30분")) temp="2B";
-                else if(courseTime.equals("11시")) temp="3A";
-                else if(courseTime.equals("11시30분")) temp="3B";
-                else if(courseTime.equals("12시")) temp="4A";
-                else if(courseTime.equals("12시30분")) temp="4B";
-                else if(courseTime.equals("13시")) temp="5A";
-                else if(courseTime.equals("13시30분")) temp="5B";
-                else if(courseTime.equals("14시")) temp="6A";
-                else if(courseTime.equals("14시30분")) temp="6B";
-                else if(courseTime.equals("15시")) temp="7A";
-                else if(courseTime.equals("15시30분")) temp="7B";
-                else if(courseTime.equals("16시")) temp="8A";
-                else if(courseTime.equals("16시30분")) temp="8B";
-                else if(courseTime.equals("17시")) temp="9A";
-                else if(courseTime.equals("17시30분")) temp="9B";
-                else if(courseTime.equals("18시분")) temp="10A";
-                else if(courseTime.equals("18시30분")) temp="10B";
-                else if(courseTime.equals("19시분")) temp="11A";
-                else if(courseTime.equals("19시30분")) temp="11B";
-                else if(courseTime.equals("20시")) temp="12A";
-                else if(courseTime.equals("20시30분")) temp="12B";
-
-                pushDay = courseDay.substring(0,1);
-                pushDay +=temp
-
-                // new BackgroundTask().execute("http://" + IP_ADDRESS + "/login.php", courseBuilding, courseDay, courseTime);
+                if (courseTime.equals("09시")) temp = "1A";
+                else if (courseTime.equals("09시30분")) temp = "1B";
+                else if (courseTime.equals("10시")) temp = "2A";
+                else if (courseTime.equals("10시30분")) temp = "2B";
+                else if (courseTime.equals("11시")) temp = "3A";
+                else if (courseTime.equals("11시30분")) temp = "3B";
+                else if (courseTime.equals("12시")) temp = "4A";
+                else if (courseTime.equals("12시30분")) temp = "4B";
+                else if (courseTime.equals("13시")) temp = "5A";
+                else if (courseTime.equals("13시30분")) temp = "5B";
+                else if (courseTime.equals("14시")) temp = "6A";
+                else if (courseTime.equals("14시30분")) temp = "6B";
+                else if (courseTime.equals("15시")) temp = "7A";
+                else if (courseTime.equals("15시30분")) temp = "7B";
+                else if (courseTime.equals("16시")) temp = "8A";
+                else if (courseTime.equals("16시30분")) temp = "8B";
+                else if (courseTime.equals("17시")) temp = "9A";
+                else if (courseTime.equals("17시30분")) temp = "9B";
+                else if (courseTime.equals("18시")) temp = "10A";
+                else if (courseTime.equals("18시30분")) temp = "10B";
+                else if (courseTime.equals("19시")) temp = "11A";
+                else if (courseTime.equals("19시30분")) temp = "11B";
+                else if (courseTime.equals("20시")) temp = "12A";
+                else if (courseTime.equals("20시30분")) temp = "12B";
+                pushDay += "%";
+                pushDay += courseDay.substring(0, 1);
+                pushDay += temp;
+                pushDay += "%";
+                System.out.println(pushDay + "123456677");
+                mArrayList.clear();
+                new BackgroundTask().execute("http://" + IP_ADDRESS + "/getTimeTable.php", courseBuilding, pushDay);
             }
         });
+        mArrayList = new ArrayList<>();
     }
 
     @Override
@@ -224,28 +220,41 @@ public class courseFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-   public interface OnFragmentInteractionListener {
+    public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-    /*
-    class BackgroundTask extends AsyncTask<String, Void, String>{
-        ProgressDialog progressDialog;
+
+    class BackgroundTask extends AsyncTask<String, Void, String> {
         String errorString = null;
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            progressDialog.dismiss();
             Log.d(TAG, "response - " + result);
 
-            if (result == null){
-
+            System.out.println(result + "12345");
+            if (result == null) {
+                System.out.println(result + "543212345");
             }
-            else {
-
+            else if(result.equals("failfail")) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("그 시간대에 사용중인 강의실이 없습니다.");
+                builder.setTitle("Notice")
+                        .setCancelable(false)
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int i){
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.setTitle("알림");
+                alert.show();
+            }
+            else{
                 mJsonString = result;
-
+                showResult();
             }
         }
 
@@ -253,12 +262,11 @@ public class courseFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            String classcode = params[1];
-            String day = params[2];
-            String time = params[3];
+            String classbuilding = params[1];
+            String classtime = params[2];
 
-            String serverURL = "http://서버IP/query.php";
-            String postParameters = "country=" + searchKeyword1 + "&name=" + searchKeyword2;
+            String serverURL = params[0];
+            String postParameters = "Building=" + classbuilding + "&Time=" + classtime;
 
 
             try {
@@ -284,10 +292,9 @@ public class courseFragment extends Fragment {
                 Log.d(TAG, "response code - " + responseStatusCode);
 
                 InputStream inputStream;
-                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
                     inputStream = httpURLConnection.getInputStream();
-                }
-                else{
+                } else {
                     inputStream = httpURLConnection.getErrorStream();
                 }
 
@@ -298,7 +305,7 @@ public class courseFragment extends Fragment {
                 StringBuilder sb = new StringBuilder();
                 String line;
 
-                while((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     sb.append(line);
                 }
 
@@ -316,53 +323,45 @@ public class courseFragment extends Fragment {
 
                 return null;
             }
-
         }
-    }
 
+        private void showResult() {
+            try {
+                JSONObject jsonObject = new JSONObject(mJsonString);
+                JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
 
-    private void showResult(){
-        try {
-            JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+                for (int i = 0; i < jsonArray.length(); i++) {
 
-            for(int i=0;i<jsonArray.length();i++){
+                    JSONObject item = jsonArray.getJSONObject(i);
 
-                JSONObject item = jsonArray.getJSONObject(i);
+                    String classname = item.getString(TAG_CLASSNAME);
+                    String classbuilding = item.getString(TAG_CLASSBUILDING);
+                    String classroom = item.getString(TAG_CLASSROOM);
+                    String classtime = item.getString(TAG_CLASSTIME);
 
-                String classcode = item.getString(TAG_CLASSCODE);
-                String grade = item.getString(TAG_GRADE);
-                String classname = item.getString(TAG_CLASSNAME);
-                String classbuilding = item.getString(TAG_CLASSBUILDING);
-                String classroom = item.getString(TAG_CLASSROOM);
-                String classtime = item.getString(TAG_CLASSTIME);
+                    HashMap<String, String> hashMap = new HashMap<>();
 
-                HashMap<String, String> hashMap = new HashMap<>();
+                    hashMap.put(TAG_CLASSNAME, classname);
+                    hashMap.put(TAG_CLASSBUILDING, classbuilding);
+                    hashMap.put(TAG_CLASSROOM, classroom);
+                    hashMap.put(TAG_CLASSTIME, classtime);
 
-                hashMap.put(TAG_CLASSCODE, classcode);
-                hashMap.put(TAG_GRADE, grade);
-                hashMap.put(TAG_CLASSNAME, classname);
-                hashMap.put(TAG_CLASSBUILDING, classbuilding);
-                hashMap.put(TAG_CLASSROOM, classroom);
-                hashMap.put(TAG_CLASSTIME, classtime);
+                    mArrayList.add(hashMap);
+                }
 
-                mArrayList.add(hashMap);
+                ListAdapter adapter = new SimpleAdapter(
+                        getContext(), mArrayList, R.layout.item_list,
+                        new String[]{TAG_CLASSNAME, TAG_CLASSBUILDING, TAG_CLASSROOM, TAG_CLASSTIME},
+                        new int[]{R.id.textView_list_classname, R.id.textView_list_classbuilding, R.id.textView_list_classroom, R.id.textView_list_classtime}
+                );
+
+                mListViewList.setAdapter(adapter);
+
+            } catch (JSONException e) {
+
+                Log.d(TAG, "showResult : ", e);
             }
 
-            ListAdapter adapter = new SimpleAdapter(
-                    nextActivity.this, mArrayList, R.layout.item_list,
-                    new String[]{TAG_CLASSCODE, TAG_GRADE, TAG_CLASSNAME, TAG_CLASSBUILDING, TAG_CLASSROOM, TAG_CLASSTIME},
-                    new int[]{R.id.textView_list_classcode, R.id.textView_list_classname, R.id.textView_list_classname,
-                            R.id.textView_list_classbuilding, R.id.textView_list_classroom, R.id.textView_list_classtime}
-            );
-
-            mListViewList.setAdapter(adapter);
-
-        } catch (JSONException e) {
-
-            Log.d(TAG, "showResult : ", e);
         }
-
     }
-    */
 }

@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="universityRefinementMajor">
-        <item>교양이론</item>
-        <item>교양실습</item>
-        <item>교양기술</item>
-        <item>교양체육</item>
-        <item>교양물리</item>
-        <item>교양수학</item>
-        <item>교양가정</item>
-        <item>교양수영</item>
-        <item>교양생물</item>
-        <item>교양지식</item>
-    </string-array>
-
     <string-array name="day">
         <item>월요일</item>
         <item>화요일</item>
