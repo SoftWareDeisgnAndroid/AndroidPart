@@ -113,6 +113,7 @@ public class courseFragment extends Fragment {
     private String courseUniversity = "";
     private String courseBuilding = "";
     private String courseDay= "";
+    private String pushDay="";
     private String courseTime = "";
 
     @Override
@@ -155,6 +156,35 @@ public class courseFragment extends Fragment {
                 courseDay = daySpinner.getSelectedItem().toString();
                 courseTime = timeSpinner.getSelectedItem().toString();
 
+                String temp = "";
+                if(courseTime.equals("09시")) temp = "1A";
+                else if(courseTime.equals("09시30분")) temp="1B";
+                else if(courseTime.equals("10시")) temp="2A";
+                else if(courseTime.equals("10시30분")) temp="2B";
+                else if(courseTime.equals("11시")) temp="3A";
+                else if(courseTime.equals("11시30분")) temp="3B";
+                else if(courseTime.equals("12시")) temp="4A";
+                else if(courseTime.equals("12시30분")) temp="4B";
+                else if(courseTime.equals("13시")) temp="5A";
+                else if(courseTime.equals("13시30분")) temp="5B";
+                else if(courseTime.equals("14시")) temp="6A";
+                else if(courseTime.equals("14시30분")) temp="6B";
+                else if(courseTime.equals("15시")) temp="7A";
+                else if(courseTime.equals("15시30분")) temp="7B";
+                else if(courseTime.equals("16시")) temp="8A";
+                else if(courseTime.equals("16시30분")) temp="8B";
+                else if(courseTime.equals("17시")) temp="9A";
+                else if(courseTime.equals("17시30분")) temp="9B";
+                else if(courseTime.equals("18시분")) temp="10A";
+                else if(courseTime.equals("18시30분")) temp="10B";
+                else if(courseTime.equals("19시분")) temp="11A";
+                else if(courseTime.equals("19시30분")) temp="11B";
+                else if(courseTime.equals("20시")) temp="12A";
+                else if(courseTime.equals("20시30분")) temp="12B";
+
+                pushDay = courseDay.substring(0,1);
+                pushDay +=temp
+
                 // new BackgroundTask().execute("http://" + IP_ADDRESS + "/login.php", courseBuilding, courseDay, courseTime);
             }
         });
@@ -194,10 +224,11 @@ public class courseFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-   /* public interface OnFragmentInteractionListener {
+   public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    /*
     class BackgroundTask extends AsyncTask<String, Void, String>{
         ProgressDialog progressDialog;
         String errorString = null;
